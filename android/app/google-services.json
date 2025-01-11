@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710580441124",
+    "project_id": "knowallet-ec8a4",
+    "storage_bucket": "knowallet-ec8a4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710580441124:android:7466ad39d08d1bfac388b1",
+        "android_client_info": {
+          "package_name": "com.mycompany.knowallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP1A1qMT9OGiMLk7TvZf6xLj6dNaYc4DI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
