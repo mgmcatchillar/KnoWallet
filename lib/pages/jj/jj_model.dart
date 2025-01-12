@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'journey_page_widget.dart' show JourneyPageWidget;
+import 'jj_widget.dart' show JjWidget;
 import 'package:flutter/material.dart';
 
-class JourneyPageModel extends FlutterFlowModel<JourneyPageWidget> {
+class JjModel extends FlutterFlowModel<JjWidget> {
   @override
   void initState(BuildContext context) {}
 

@@ -60,15 +60,15 @@ class UserExpendituresRecord extends FirestoreRecord {
   int get allowance => _allowance ?? 0;
   bool hasAllowance() => _allowance != null;
 
-  // "savings" field.
-  String? _savings;
-  String get savings => _savings ?? '';
-  bool hasSavings() => _savings != null;
-
   // "balance" field.
   int? _balance;
   int get balance => _balance ?? 0;
   bool hasBalance() => _balance != null;
+
+  // "savings" field.
+  int? _savings;
+  int get savings => _savings ?? 0;
+  bool hasSavings() => _savings != null;
 
   void _initializeFields() {
     _utilities = castToType<int>(snapshotData['utilities']);
@@ -80,8 +80,8 @@ class UserExpendituresRecord extends FirestoreRecord {
     _health = castToType<int>(snapshotData['health']);
     _rent = castToType<int>(snapshotData['rent']);
     _allowance = castToType<int>(snapshotData['allowance']);
-    _savings = snapshotData['savings'] as String?;
     _balance = castToType<int>(snapshotData['balance']);
+    _savings = castToType<int>(snapshotData['savings']);
   }
 
   static CollectionReference get collection =>
@@ -129,8 +129,8 @@ Map<String, dynamic> createUserExpendituresRecordData({
   int? health,
   int? rent,
   int? allowance,
-  String? savings,
   int? balance,
+  int? savings,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -143,8 +143,8 @@ Map<String, dynamic> createUserExpendituresRecordData({
       'health': health,
       'rent': rent,
       'allowance': allowance,
-      'savings': savings,
       'balance': balance,
+      'savings': savings,
     }.withoutNulls,
   );
 
@@ -166,8 +166,8 @@ class UserExpendituresRecordDocumentEquality
         e1?.health == e2?.health &&
         e1?.rent == e2?.rent &&
         e1?.allowance == e2?.allowance &&
-        e1?.savings == e2?.savings &&
-        e1?.balance == e2?.balance;
+        e1?.balance == e2?.balance &&
+        e1?.savings == e2?.savings;
   }
 
   @override
@@ -181,8 +181,8 @@ class UserExpendituresRecordDocumentEquality
         e?.health,
         e?.rent,
         e?.allowance,
-        e?.savings,
-        e?.balance
+        e?.balance,
+        e?.savings
       ]);
 
   @override

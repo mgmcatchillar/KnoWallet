@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/index.dart';
 import '/main.dart';
@@ -33,12 +35,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => const NavBarPage(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Image.asset(
+                  'assets/images/Add_a_heading.gif',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          : const NavBarPage(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const NavBarPage(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Image.asset(
+                      'assets/images/Add_a_heading.gif',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : const NavBarPage(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -66,16 +88,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
         ),
         FFRoute(
-          name: 'JourneyPage',
-          path: '/journeyPage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'JourneyPage')
-              : const NavBarPage(
-                  initialPage: 'JourneyPage',
-                  page: JourneyPageWidget(),
-                ),
-        ),
-        FFRoute(
           name: 'Grocery',
           path: '/grocery',
           builder: (context, params) => params.isEmpty
@@ -83,9 +95,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const GroceryWidget(),
         ),
         FFRoute(
-          name: 'Data',
-          path: '/data',
-          builder: (context, params) => const DataWidget(),
+          name: 'JJ',
+          path: '/jj',
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'JJ') : const JjWidget(),
+        ),
+        FFRoute(
+          name: 'Alice',
+          path: '/alice',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: AliceWidget(),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -158,6 +179,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -176,6 +198,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }

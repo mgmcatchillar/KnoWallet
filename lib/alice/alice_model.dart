@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'data_widget.dart' show DataWidget;
+import 'alice_widget.dart' show AliceWidget;
 import 'package:flutter/material.dart';
 
-class DataModel extends FlutterFlowModel<DataWidget> {
+class AliceModel extends FlutterFlowModel<AliceWidget> {
   @override
   void initState(BuildContext context) {}
 

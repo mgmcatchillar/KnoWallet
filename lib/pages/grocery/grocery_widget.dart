@@ -42,7 +42,7 @@ class _GroceryWidgetState extends State<GroceryWidget> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: FlutterFlowTheme.of(context).secondary,
           automaticallyImplyLeading: false,
           title: Text(
             'Necessities List',
@@ -458,7 +458,7 @@ class _GroceryWidgetState extends State<GroceryWidget> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
-                                'assets/images/55_Bonus_pack.jpg',
+                                'assets/images/bc718be6-1e78-4abb-bcb2-b1bc62bb262c.jpg',
                                 width: 200.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,

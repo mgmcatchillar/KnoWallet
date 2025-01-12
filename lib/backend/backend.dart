@@ -5,6 +5,7 @@ import 'schema/util/firestore_util.dart';
 import 'schema/user_name_record.dart';
 import 'schema/data_record.dart';
 import 'schema/user_expenditures_record.dart';
+import 'schema/coll_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -16,6 +17,7 @@ export 'schema/util/schema_util.dart';
 export 'schema/user_name_record.dart';
 export 'schema/data_record.dart';
 export 'schema/user_expenditures_record.dart';
+export 'schema/coll_record.dart';
 
 /// Functions to query UserNameRecords (as a Stream and as a Future).
 Future<int> queryUserNameRecordCount({
@@ -123,6 +125,43 @@ Future<List<UserExpendituresRecord>> queryUserExpendituresRecordOnce({
     queryCollectionOnce(
       UserExpendituresRecord.collection,
       UserExpendituresRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query CollRecords (as a Stream and as a Future).
+Future<int> queryCollRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CollRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<CollRecord>> queryCollRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CollRecord.collection,
+      CollRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CollRecord>> queryCollRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CollRecord.collection,
+      CollRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

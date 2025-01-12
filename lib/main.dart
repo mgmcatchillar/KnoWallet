@@ -36,12 +36,17 @@ class _MyAppState extends State<MyApp> {
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
+  bool displaySplashImage = true;
+
   @override
   void initState() {
     super.initState();
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
+
+    Future.delayed(const Duration(milliseconds: 1000),
+        () => safeSetState(() => _appStateNotifier.stopShowingSplashImage()));
   }
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
@@ -94,8 +99,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': const HomePageWidget(),
+      'JJ': const JjWidget(),
       'Streak': const StreakWidget(),
-      'JourneyPage': const JourneyPageWidget(),
       'Grocery': const GroceryWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -155,14 +160,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  FontAwesomeIcons.trophy,
+                  Icons.pie_chart,
                   color: currentIndex == 1
                       ? const Color(0xFFB2ADA0)
                       : FlutterFlowTheme.of(context).tertiary,
                   size: 24.0,
                 ),
                 Text(
-                  'Home',
+                  'Progress',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -179,14 +184,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.pie_chart,
+                  FontAwesomeIcons.trophy,
                   color: currentIndex == 2
                       ? const Color(0xFFB2ADA0)
                       : FlutterFlowTheme.of(context).tertiary,
                   size: 24.0,
                 ),
                 Text(
-                  'Progress',
+                  'Streak',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
